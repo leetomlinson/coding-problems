@@ -3,7 +3,7 @@ project(ctci_solutions)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES ch8_ex1.cpp ch16_ex1.cpp)
+set(SOURCE_FILES ch8_ex1.cpp ch16_ex1.cpp ch16_ex2.cpp)
 add_executable(run_tests ${SOURCE_FILES})
 
 add_subdirectory(googletest)
