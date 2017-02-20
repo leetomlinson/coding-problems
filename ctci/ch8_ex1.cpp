@@ -47,8 +47,11 @@ public:
  * Assumptions:
  *
  * Concerns:
+ * - Integer overflow
  *
  * Complexity:
+ * - For first calculation of step N the complexity is O(N) time and
+ *   O(N) space (because of the recursive call stack).
  *
  * Notes:
  */
