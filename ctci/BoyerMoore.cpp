@@ -122,7 +122,7 @@ int BoyerMooreSkipTable::Skip(char row, int column) {
 /**
  * Searches string from specified character position for exact match
  * with query and returns position of first matching character.
- * Returns -1 if no match.
+ * Returns len(string) if no match.
  *
  * @param str String in which to search
  * @param query String for which to search
@@ -130,14 +130,20 @@ int BoyerMooreSkipTable::Skip(char row, int column) {
  * @return Position of first matching character
  */
 int BoyerMooreFind(string const &str, string const &query, int pos) {
+  if (query.size() > str.size()) {
+    return str.size();
+  }
+  
   // Initialize skips table
   BoyerMooreSkipTable skip(query);
-  
-  for (int idx_begin = pos; pos < str.size(); ) {
+
+  for (int idx_begin = pos; idx_begin < str.size() - query.size(); ) {
+    // Could also use 'while' loop
     bool match = true;
     int idx_query = query.size() - 1;
       
     for (; idx_query >= 0; --idx_query) {
+      // Could also use while loop
       if (query[idx_query] != str[idx_begin + idx_query]) {
 	match = false;
 	break;
@@ -151,7 +157,7 @@ int BoyerMooreFind(string const &str, string const &query, int pos) {
     idx_begin += skip.Skip(str[idx_begin + idx_query], idx_query);
   }
 
-  return -1;
+  return str.size();
 }
 
 /**
@@ -209,5 +215,5 @@ TEST(test_ch16_ex2, test_BoyerMooreFind_basic) {
   EXPECT_EQ(4, BoyerMooreFind("CCGTAACTGCTGAACTGCTG", "AACT", 0));
   EXPECT_EQ(4, BoyerMooreFind("CCGTAACTGCTGAACTGCTG", "AACT", 4));
   EXPECT_EQ(12, BoyerMooreFind("CCGTAACTGCTGAACTGCTG", "AACT", 5));
-  EXPECT_EQ(-1, BoyerMooreFind("CCGTAACTGCTGAACTGCTG", "AACTA", 0));
+  EXPECT_EQ(20, BoyerMooreFind("CCGTAACTGCTGAACTGCTG", "AACTA", 0));
 }
