@@ -166,10 +166,10 @@ int BoyerMooreFind(string const &str, string const &query, int pos) {
  *
  * Concerns:
  *
- * Complexity:
+ * Complexity: Is this analysis correct?  Brute-force search is O(M*N)
  * - Let 'searched' be string of length M - string being searched
  * - Let 'query' be string of length N - query string
- * - Typically better than O(N)
+ * - Typically better than O(M*N)
  * - Min skip is 1 --> Worst case: O(N); e.g. consider searching for 'A' in 'BCDEFGHIJ'
  * - Max skip is len(query) --> Best case: O(M/N)
  *
